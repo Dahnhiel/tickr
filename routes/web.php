@@ -5,9 +5,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TaskController;
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/', [TaskController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 Route::get('/register', [RegisterController::class, 'index'])
     ->name('register');
