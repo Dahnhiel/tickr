@@ -26,4 +26,6 @@ Route::post('logout', [LoginController::class, 'logout'])
 
 Route::middleware('auth')->group(function () {
     Route::resource('tasks', TaskController::class);
+    Route::patch('/tasks/{task}/complete', [TaskController::class, 'markAsCompleted'])->name('tasks.complete');
+    Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
 });
