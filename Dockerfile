@@ -35,5 +35,11 @@ RUN chown -R www-data:www-data /var/www/html \
 # Expose port 8000
 EXPOSE 8000
 
+# Create entrypoint script
+RUN echo '#!/bin/sh\n\
+php artisan migrate --force\n\
+php artisan serve --host=0.0.0.0 --port=8000' > /entrypoint.sh \
+    && chmod +x /entrypoint.sh
+
 # Start the application
-CMD php artisan serve --host=0.0.0.0 --port=8000
+CMD ["/entrypoint.sh"]
