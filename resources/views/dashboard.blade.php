@@ -248,7 +248,7 @@
                 @endif
 
                 <!-- Invite Section -->
-                <div class="mt-6 pt-4 border-t border-gray-200">
+                {{-- <div class="mt-6 pt-4 border-t border-gray-200">
                     <div class="flex items-center justify-between">
                         <div class="flex -space-x-2">
                             <img class="w-8 h-8 rounded-full border-2 border-white"
@@ -276,7 +276,7 @@
                             <span>Invite</span>
                         </button>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
