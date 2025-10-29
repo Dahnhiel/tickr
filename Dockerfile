@@ -1,10 +1,13 @@
-# Use official PHP image with FPM
-FROM php:8.3-fpm
+FROM node:20-alpine AS node-builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-# Set working directory
+FROM php:8.3-fpm
 WORKDIR /var/www/html
 
-# Install system dependencies and PostgreSQL extensions
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -19,27 +22,21 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd mbstring exif pcntl bcmath opcache pdo pdo_mysql pdo_pgsql
 
-# Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy files
 COPY . .
+COPY --from=node-builder /app/public/build ./public/build
 
-# Install dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Set permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Expose port 8000
 EXPOSE 8000
 
-# Create entrypoint script
 RUN echo '#!/bin/sh\n\
 php artisan migrate --force\n\
 php artisan serve --host=0.0.0.0 --port=8000' > /entrypoint.sh \
     && chmod +x /entrypoint.sh
 
-# Start the application
 CMD ["/entrypoint.sh"]
