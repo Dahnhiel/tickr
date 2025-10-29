@@ -1,8 +1,7 @@
 <nav class="bg-white shadow-sm px-6 py-4 fixed top-0 left-0 right-0 z-50">
     <div class="flex justify-between items-center">
-        <!-- Left side - Hamburger Menu (Mobile) + Logo/Brand -->
         <div class="flex items-center space-x-4">
-            <!-- Hamburger Menu Button (Mobile Only) -->
+            <!-- Hamburger Menu Button -->
             @auth
                 <button id="hamburger-menu" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
                     <div class="hamburger-icon">
@@ -16,7 +15,7 @@
             <!-- Logo/Brand -->
             <a href="/" class="flex items-center space-x-2">
                 <span class="text-2xl font-bold">
-                    <span class="text-red-400">Dash</span><span class="text-gray-900">board</span>
+                    <x-logo />
                 </span>
             </a>
 

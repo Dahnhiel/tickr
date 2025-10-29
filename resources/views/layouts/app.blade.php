@@ -69,12 +69,10 @@
             // Handle window resize
             $(window).resize(function() {
                 if ($(window).width() >= 768) {
-                    // Desktop view - ensure sidebar is visible and overlay is hidden
                     $('#sidebar').removeClass('-translate-x-full');
                     $('#sidebar-overlay').addClass('hidden');
                     $('.hamburger-icon').removeClass('active');
                 } else {
-                    // Mobile view - ensure sidebar is hidden by default
                     $('#sidebar').addClass('-translate-x-full');
                     $('#sidebar-overlay').addClass('hidden');
                     $('.hamburger-icon').removeClass('active');
